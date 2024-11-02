@@ -1,0 +1,12 @@
+<div class="container text-white">
+    <h2>Lista de Clientes</h2>
+    <ul>
+        <li *ngFor="let cliente of clientes">
+            <strong>Nome:</strong> {{ cliente.nome }} <br>
+            <strong>CPF:</strong> {{ cliente.cpf }} <br>
+            <strong>Email:</strong> {{ cliente.email }} <br>
+            <strong>Telefone:</strong> {{ cliente.telefone }}
+            <hr>
+        </li>
+    </ul>
+</div>

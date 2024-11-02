@@ -16,23 +16,53 @@
 
     <hr>
 
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <button
-                class="btn bg-transparent border-0 col-md-8 d-md-flex h-100 align-items-md-center justify-content-md-evenly"><i
-                    class="fa-solid fa-gear fa-lg" style="color: #ffffff;"></i>
-                <p class="text-altivo">
-                <p class="text-altivo fs-6 fw-medium text-white m-0 mt-1">Estoque</p>
-            </button>
-        </div>
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-md-11">
+            <p-panelmenu [model]="items" styleClass="w-full md:w-80">
+                <ng-template pTemplate="item" let-item let-expanded="expanded">
+                    <!-- Renderiza o cabeçalho do item principal (com sub-itens) -->
+                    <ng-container *ngIf="item.items; else singleItemTemplate">
+                        <span class="header d-flex align-items-center cursor-pointer px-4 py-2 ms-2">
+                            <span [ngClass]="[item.icon, 'me-2']"></span> <!-- Ícone do cabeçalho com margem -->
+                            <span>{{ item.label }}</span> <!-- Texto do cabeçalho -->
+                            <div class="ms-auto">
+                                <i class="pi" [ngClass]="!expanded ? 'pi-angle-down' : 'pi-angle-right'"></i>
+                            </div>
+                            <!-- Ícone de seta -->
+                        </span>
 
-        <div class="col-md-12">
-            <button
-                class="btn bg-transparent border-0 col-md-8 d-md-flex h-100 align-items-md-center justify-content-md-evenly"><i
-                    class="fa-regular fa-user fa-lg" style="color: #ffffff;"></i>
-                <p class="text-altivo">
-                <p class="text-altivo fs-6 fw-medium text-white m-0 mt-1">Usuários</p>
-            </button>
+                        <!-- Renderiza os sub-itens do cabeçalho apenas quando expandido -->
+                        <div *ngIf="expanded">
+                            <div *ngFor="let subItem of item.items" class="sub-item">
+                                <a *ngIf="subItem.route" [routerLink]="subItem.route"
+                                    class="flex align-items-center px-3 py-2 ms-4 mt-1">
+                                    <span [ngClass]="[subItem.icon, 'me-2']"></span> <!-- Ícone do sub-item -->
+                                    <span>{{ subItem.label }}</span> <!-- Texto do sub-item -->
+                                </a>
+                                <a *ngIf="subItem.url && !subItem.route" [href]="subItem.url"
+                                    class="flex align-items-center px-3 py-2 ms-4">
+                                    <span [ngClass]="[subItem.icon, 'me-2']"></span> <!-- Ícone do sub-item -->
+                                    <span>{{ subItem.label }}</span> <!-- Texto do sub-item -->
+                                </a>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <!-- Template para itens individuais sem sub-itens -->
+                    <ng-template #singleItemTemplate>
+                        <a *ngIf="item.route" [routerLink]="item.route"
+                            class="flex align-items-center cursor-pointer px-3 py-1 ms-2">
+                            <span [ngClass]="[item.icon, 'me-2']"></span> <!-- Ícone do item individual -->
+                            <span>{{ item.label }}</span> <!-- Texto do item individual -->
+                        </a>
+                        <a *ngIf="item.url && !item.route" [href]="item.url"
+                            class="flex align-items-center cursor-pointer px-3 py-1 ms-2">
+                            <span [ngClass]="[item.icon, 'me-2']"></span> <!-- Ícone do item individual -->
+                            <span>{{ item.label }}</span> <!-- Texto do item individual -->
+                        </a>
+                    </ng-template>
+                </ng-template>
+            </p-panelmenu>
         </div>
     </div>
 </div>

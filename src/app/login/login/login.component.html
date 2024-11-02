@@ -5,20 +5,21 @@
             <p class="text-poppins text-primary m-0">Faça login para continuar</p>
         </div>
         <div class="col-12 d-flex flex-column justify-content-center align-items-center my-4">
-            <div class="col-8">
-                <label for="input-user" class="form-label">
-                    <p class="text-redhat text-white m-0">Usuário</p>
-                </label>
-                <input id="input-user" class="form-control form-control-sm" type="text"
-                    placeholder="Insira seu usuário">
-            </div>
+            <div class="col-10 d-flex flex-column align-items-center">
+                <div class="col-8 d-flex flex-column">
+                    <label for="input-user" class="form-label">
+                        <p class="text-redhat text-white m-0">Usuário</p>
+                    </label>
+                    <input type="text" style="height: 30px; width: 222.24px;" pInputText [(ngModel)]="value" />
+                </div>
 
-            <div class="col-8 mt-2">
-                <label for="input-senha" class="form-label">
-                    <p class="text-redhat text-white m-0">Senha</p>
-                </label>
-                <input id="input-senha" class="form-control form-control-sm" type="password"
-                    placeholder="Insira sua senha">
+                <div class="col-8 d-flex flex-column">
+                    <label for="input-senha" class="form-label">
+                        <p class="text-redhat text-white m-0">Senha</p>
+                    </label>
+                    <p-password [inputStyle]="{ 'height': '30px'}" [toggleMask]="true" class="custom-password"
+                        [feedback]="false" />
+                </div>
             </div>
         </div>
         <div class="col-12 d-flex justify-content-center mt-3">
