@@ -1,0 +1,11 @@
+.custom-background {
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
+}
+
+.custom-background-login {
+    background-image: linear-gradient(to right, #1a1a1a, #19191a, #19191a, #18181b, #17181b, #15171a, #13161a, #111519, #0f1417, #0d1214, #0b1011, #0a0e0e);
+    box-shadow: 8px 16px 40px #2F4B4633;
+    border-radius: 16px;
+}

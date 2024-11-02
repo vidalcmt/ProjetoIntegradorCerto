@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="custom-gradient col-12 d-flex justify-content-center align-items-center h-100">
+    <div class="custom-background-login col-3 d-flex flex-column align-items-center" style="height: 380px;">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-5">
+            <h3 class="text-redhat fw-semibold fs-4 text-white m-0">Bem-vindo</h3>
+            <p class="text-poppins text-primary m-0">Faça login para continuar</p>
+        </div>
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center my-4">
+            <div class="col-8">
+                <label for="input-user" class="form-label">
+                    <p class="text-redhat text-white m-0">Usuário</p>
+                </label>
+                <input id="input-user" class="form-control form-control-sm" type="text"
+                    placeholder="Insira seu usuário">
+            </div>
+
+            <div class="col-8 mt-2">
+                <label for="input-senha" class="form-label">
+                    <p class="text-redhat text-white m-0">Senha</p>
+                </label>
+                <input id="input-senha" class="form-control form-control-sm" type="password"
+                    placeholder="Insira sua senha">
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <button class="btn btn-outline-primary btn-sm w-50" (click)="navegarEntrePaginas('home')">Login</button>
+        </div>
+    </div>
+</div>
