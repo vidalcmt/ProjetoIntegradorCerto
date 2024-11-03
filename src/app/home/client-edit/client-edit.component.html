@@ -1,12 +1,49 @@
-<div class="container text-white">
-    <h2>Lista de Clientes</h2>
-    <ul>
-        <li *ngFor="let cliente of clientes">
-            <strong>Nome:</strong> {{ cliente.nome }} <br>
-            <strong>CPF:</strong> {{ cliente.cpf }} <br>
-            <strong>Email:</strong> {{ cliente.email }} <br>
-            <strong>Telefone:</strong> {{ cliente.telefone }}
-            <hr>
-        </li>
-    </ul>
+<div class="container-fluid m-0 p-0">
+    <div class="col-md-12 d-flex justify-content-center my-4">
+        <div class="col-md-11">
+            <p class="text-poppins fs-3 text-white fw-semibold ms-1">Gerenciar Clientes</p>
+            <hr style="color: white;">
+        </div>
+    </div>
+
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-md-11">
+            <table class="table table-dark table-hover">
+                <thead class="text-altivo fs-6">
+                    <tr>
+                        <th scope="col">Nome Completo</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let cliente of Clientes, let i = index">
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.nome }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.cpf }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.email }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.telefone }}</th>
+                        <th>
+                            <button class="btn btn-primary btn-sm text-poppins" (click)="abrirModal(editClient, i)">Editar</button>
+                        </th>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 </div>
+
+<ng-template #editClient let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar Cliente {{ Clientes[index].nome }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- FORMULARIO AQUI -->
+    </div>
+    <div class="modal-footer">
+        <!-- BOTÃO SAVE OU CANCELAR AQUI -->
+    </div>
+</ng-template>

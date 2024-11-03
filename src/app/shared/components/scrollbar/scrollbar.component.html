@@ -22,7 +22,7 @@
                 <ng-template pTemplate="item" let-item let-expanded="expanded">
                     <!-- Renderiza o cabeçalho do item principal (com sub-itens) -->
                     <ng-container *ngIf="item.items; else singleItemTemplate">
-                        <span class="header d-flex align-items-center cursor-pointer px-4 py-2 ms-2">
+                        <span class="header d-flex align-items-center cursor-pointer px-3 py-2 ms-2">
                             <span [ngClass]="[item.icon, 'me-2']"></span> <!-- Ícone do cabeçalho com margem -->
                             <span>{{ item.label }}</span> <!-- Texto do cabeçalho -->
                             <div class="ms-auto">

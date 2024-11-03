@@ -11,7 +11,7 @@ export class ClienteService {
 
     constructor(private http: HttpClient) { }
 
-    findAll(): Observable<Cliente[]> {
+    BuscaClienteReq(): Observable<Cliente[]> {
         return this.http.get<Cliente[]>(`${this.apiUrl}/findAll`);
     }
 }
