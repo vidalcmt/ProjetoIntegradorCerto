@@ -11,6 +11,6 @@ export const routes: Routes = [
         component: HomeComponent,
         children: [
             { path: '', component: GeneralComponent, },
-            { path: 'cliente-editar', component: ClientEditComponent, },
+            { path: 'cliente-editar', component: ClientEditComponent, runGuardsAndResolvers: 'always' },
         ] }
 ];

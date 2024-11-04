@@ -22,54 +22,16 @@ export class ScrollbarComponent implements OnInit {
   constructor(
     private router: Router,
     private viewportScroller: ViewportScroller
-  ) 
-  {
+  ) {
   }
 
   ngOnInit() {
-    this.inicializaMenu();
+
   }
 
   navegarEntrePaginas(rota: string) {
     this.router.navigate([`/home/${rota}`]).then(() => {
       this.viewportScroller.scrollToPosition([0, 0]);
     });
-  }
-
-  inicializaMenu() {
-    this.items = [
-      {
-        label: 'Estoque',
-        icon: 'pi pi-box',
-        items: [
-          {
-            label: 'Relatório',
-            icon: 'pi pi-chart-bar',
-            route: '/installation'
-          },
-          {
-            label: 'Gerenciar Estoque',
-            icon: 'pi pi-database',
-            route: '/configuration'
-          }
-        ]
-      },
-      {
-        label: 'Clientes',
-        icon: 'pi pi-users',
-        items: [
-          {
-            label: 'Gerenciar Clientes',
-            icon: 'pi pi-user-edit',
-            route: '/configuration'
-          },
-          {
-            label: 'Cadastrar',
-            icon: 'pi pi-user-plus',
-            route: '/configuration'
-          }
-        ]
-      }
-    ];
   }
 }
