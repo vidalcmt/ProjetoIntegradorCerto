@@ -9,9 +9,9 @@ import { Cliente } from '../models/cliente.model';
 export class FuncionarioService {
     private apiUrl = 'http://localhost:8080/funcionario';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    saveCliente(cliente: Cliente): Observable<Cliente> {
+    SalvarClienteReq(cliente: Cliente): Observable<Cliente> {
         return this.http.post<Cliente>(`${this.apiUrl}/saveCliente`, cliente);
     }
 }

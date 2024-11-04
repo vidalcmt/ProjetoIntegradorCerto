@@ -3,8 +3,9 @@
         <div class="col-md-11">
             <div class="col-md-12 d-flex justify-content-between">
                 <p class="text-poppins fs-3 text-white fw-semibold ms-1 mb-0g">Gerenciar Clientes</p>
-                <button class="btn btn-success h-50" (click)="abrirModal(createClient, 0)"><i
-                        class="fa-solid fa-plus me-2" style="color: #ffffff;"></i>Novo Cliente</button>
+                <button class="btn btn-success h-50" (click)="abrirModal(createClient, 0, 'create')">
+                    <i class="fa-solid fa-plus me-2" style="color: #ffffff;"></i>Novo Cliente
+                </button>
             </div>
 
             <hr style="color: white;">
@@ -31,9 +32,9 @@
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.telefone }}</th>
                         <th>
                             <button class="btn btn-primary btn-sm text-poppins w-25 me-4"
-                                (click)="abrirModal(editClient, i); setClienteData(index)">Editar</button>
+                                (click)="abrirModal(editClient, i, 'edit')">Editar</button>
                             <button class="btn btn-danger btn-sm w-25 text-poppins"
-                            (click)="abrirModal(deleteClient, i)">Excluir</button>
+                                (click)="abrirModal(deleteClient, i, 'delete')">Excluir</button>
                         </th>
                     </tr>
                 </tbody>
@@ -101,7 +102,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <form [formGroup]="form" novalidate>
             <div class="col-md-11 d-flex">
                 <div class="col-md-6 me-4">
                     <label for="nomeCompleto" class="form-label">Nome Completo</label>
@@ -114,7 +115,7 @@
 
                 <div class="col-md-4">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" maxlength="11" formControlName="cpf" class="form-control"
+                    <input type="text" formControlName="cpf" class="form-control"  mask="000.000.000-00"
                         [ngClass]="{ 'is-invalid': isFieldInvalid('cpf') }" />
                     <div *ngIf="isFieldInvalid('cpf')" class="invalid-feedback">
                         {{ getErrorMessage('cpf') }}
@@ -134,7 +135,7 @@
 
                 <div class="col-md-4">
                     <label for="telefone" class="form-label">Telefone</label>
-                    <input type="text" maxlength="11" formControlName="telefone" class="form-control"
+                    <input type="text" formControlName="telefone" class="form-control"
                         [ngClass]="{ 'is-invalid': isFieldInvalid('telefone') }" />
                     <div *ngIf="isFieldInvalid('telefone')" class="invalid-feedback">
                         {{ getErrorMessage('telefone') }}
@@ -147,7 +148,7 @@
     <div class="modal-footer">
         <div class="col-md-12 d-flex justify-content-end">
             <button type="submit" (click)="modal.dismiss()" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-success ms-4">Criar cliente</button>
+            <button type="submit" (click)="onSubmit()" class="btn btn-success ms-4">Criar cliente</button>
         </div>
     </div>
 </ng-template>
@@ -158,8 +159,8 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-   <p class="text-poppins m-0 mb-1 fs-5">Você tem certeza que deseja deletar este usuário?</p>
-   <p class="text-altivo fw-lighter text-danger">Esta ação será irreversível</p>
+        <p class="text-poppins m-0 mb-1 fs-5">Você tem certeza que deseja deletar este usuário?</p>
+        <p class="text-altivo fw-lighter text-danger">Esta ação será irreversível</p>
 
     </div>
     <div class="modal-footer">

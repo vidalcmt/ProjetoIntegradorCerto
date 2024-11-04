@@ -3,9 +3,13 @@ import { SHARED_IMPORTS } from '../../shared/shared-imports';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
 import { ViewportScroller, NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { subscribe } from 'diagnostics_channel';
+import { FuncionarioService } from '../../services/funcionario.service';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
 @Component({
@@ -13,42 +17,96 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   standalone: true,
   imports: [
     SHARED_IMPORTS,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective
   ],
   templateUrl: './client-edit.component.html',
-  styleUrl: './client-edit.component.scss'
+  styleUrl: './client-edit.component.scss',
+  providers: [provideNgxMask()]
 })
 export class ClientEditComponent implements OnInit {
   Clientes: Cliente[] = [];
   novoCliente: Cliente = new Cliente();
   form!: FormGroup;
+  private navigationSubscription!: Subscription;
+  editMode: boolean = false;
+  clienteSelecionado: any = null;
 
   index!: number;
   private modalService = inject(NgbModal);
 
   constructor(
     private clienteService: ClienteService,
+    private funcionarioService: FuncionarioService,
     private viewportScroller: ViewportScroller,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.carregarClientes();
 
+    this.navigationSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.urlAfterRedirects === '/home/cliente-editar') {
+        this.carregarClientes();
+      }
+    });
+
     // VALIDAÇÃO DOS CAMPOS
+    this.initForm();
+  }
+
+  initForm() {
     this.form = this.fb.group({
       nomeCompleto: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      email: ['', Validators.required],
-      telefone: ['', Validators.required],
+      cpf: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required]
     });
   }
 
-  abrirModal(content: any, index: number) {
-    this.index = index;
-    this.modalService.open(content, {size: 'lg'});
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const clienteData = this.form.value;
+
+    if (this.editMode) {
+      this.updateCliente(clienteData);
+    } else {
+      this.salvarCliente(clienteData);
+    }
   }
+
+  updateCliente(cliente: any) {
+
+    console.log("Cliente atualizado:", cliente);
+  }
+
+  ngOnDestroy(): void {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  abrirModal(content: any, index: number, action: string) {
+    this.index = index;
+
+    if (action === 'create') {
+      this.editMode = false;
+      this.form.reset();
+    } else if (action === 'edit') {
+      this.editMode = true;
+      this.setClienteData(index);
+    }
+
+    // Abre o modal com o conteúdo passado e tamanho 'lg'
+    this.modalService.open(content, { size: 'lg' });
+  }
+
 
   navegarEntrePaginas(rota: string) {
     this.router.navigate([`/${rota}`]).then(() => {
@@ -66,6 +124,20 @@ export class ClientEditComponent implements OnInit {
       });
     }
   }
+
+  salvarCliente(cliente: any) {
+    this.funcionarioService.SalvarClienteReq(cliente).subscribe(
+      (data) => {
+        this.novoCliente = data;
+        this.carregarClientes();
+        console.log("Cliente salvo com sucesso:", this.novoCliente);
+      },
+      (error) => {
+        console.error("Erro ao salvar cliente:", error);
+      }
+    );
+  }
+
 
   carregarClientes(): void {
     this.clienteService.BuscaClienteReq().subscribe(
@@ -88,16 +160,6 @@ export class ClientEditComponent implements OnInit {
     if (field?.hasError('required')) {
       return 'Este campo é obrigatório.';
     }
-    if (field?.hasError('pattern') && fieldName === 'cpf') {
-      return 'O CPF deve conter 11 dígitos numéricos.';
-    }
     return '';
-  }
-
-  onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched(); 
-      return;
-    }
   }
 }

@@ -22,20 +22,24 @@
                 <!-- Estoque -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingEstoque">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button collapsed border-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseEstoque" aria-expanded="true" aria-controls="collapseEstoque">
                             <i class="pi pi-box me-2"></i> Estoque
                         </button>
                     </h2>
-                    <div id="collapseEstoque" class="accordion-collapse collapse show" aria-labelledby="headingEstoque"
+                    <div id="collapseEstoque" class="accordion-collapse collapse" aria-labelledby="headingEstoque"
                         data-bs-parent="#menuAccordion">
-                        <div class="accordion-body">
-                            <a [routerLink]="'/installation'" class="d-flex align-items-center py-2 ms-3">
-                                <i class="pi pi-chart-bar me-2"></i> Relatório
-                            </a>
-                            <a [routerLink]="'/configuration'" class="d-flex align-items-center py-2 ms-3">
-                                <i class="pi pi-database me-2"></i> Gerenciar Estoque
-                            </a>
+                        <div class="accordion-body p-0">
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                <i class="pi pi-user-edit me-2"></i> Relatórios
+                            </button>
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -43,21 +47,49 @@
                 <!-- Clientes -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingClientes">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button collapsed w-100" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseClientes" aria-expanded="false" aria-controls="collapseClientes">
                             <i class="pi pi-users me-2"></i> Clientes
                         </button>
                     </h2>
-                    <div id="collapseClientes" class="accordion-collapse collapse" aria-labelledby="headingClientes"
-                        data-bs-parent="#menuAccordion">
-                        <div class="accordion-body">
-                            <a (click)="navegarEntrePaginas('cliente-editar')"
-                                class="d-flex align-items-center py-2 ms-3">
+                    <div id="collapseClientes" class="accordion-collapse collapse w-100"
+                        aria-labelledby="headingClientes" data-bs-parent="#menuAccordion">
+                        <div class="accordion-body p-0">
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
                                 <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
-                            </a>
-                            <a [routerLink]="'/configuration'" class="d-flex align-items-center py-2 ms-3">
-                                <i class="pi pi-user-plus me-2"></i> Cadastrar
-                            </a>
+                            </button>
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fornecedores -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSupplier">
+                        <button class="accordion-button collapsed w-100" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSupplier" aria-expanded="false" aria-controls="collapseSupplier">
+                            <i class="pi pi-users me-2"></i> Fornecedores
+                        </button>
+                    </h2>
+                    <div id="collapseSupplier" class="accordion-collapse collapse w-100"
+                        aria-labelledby="headingClientes" data-bs-parent="#menuAccordion">
+                        <div class="accordion-body p-0">
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                <i class="fa-solid fa-truck-field me-2"></i> Gerenciar Fornecedores
+                            </button>
+                            <button (click)="navegarEntrePaginas('cliente-editar')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
+                            </button>
                         </div>
                     </div>
                 </div>
