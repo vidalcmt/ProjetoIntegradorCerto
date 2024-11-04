@@ -14,4 +14,8 @@ export class ClienteService {
     BuscaClienteReq(): Observable<Cliente[]> {
         return this.http.get<Cliente[]>(`${this.apiUrl}/findAll`);
     }
+
+    SalvarClienteReq(cliente: Cliente): Observable<Cliente>{
+        return this.http.post<Cliente>(`${this.apiUrl}/save`, cliente);
+    }
 }

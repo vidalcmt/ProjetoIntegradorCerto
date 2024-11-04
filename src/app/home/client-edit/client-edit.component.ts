@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared-imports';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
@@ -16,8 +16,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './client-edit.component.html',
   styleUrl: './client-edit.component.scss'
 })
-export class ClientEditComponent {
+export class ClientEditComponent implements OnInit {
   Clientes: Cliente[] = [];
+  novoCliente: Cliente = new Cliente();
+
   index!: number;
   private modalService = inject(NgbModal);
 
