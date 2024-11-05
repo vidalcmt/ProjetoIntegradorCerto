@@ -4,5 +4,43 @@
             <p class="text-poppins fs-3 text-white fw-semibold ms-1">Bom dia, {{ usuario }}</p>
             <hr style="color: white;">
         </div>
+
+        <div class="col-md-12">
+            <div class="container my-4">
+                <h2 class="mb-4">Estoque de Produtos</h2>
+
+
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <div class="container">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Nome do Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Preço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let produto of produtos">
+                                    <td>{{ produto.nome }}</td>
+                                    <td>{{ produto.quantidade }}</td>
+                                    <td>{{ produto.preco | currency:'BRL' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
