@@ -27,12 +27,15 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 export class ClientEditComponent implements OnInit {
   Clientes: Cliente[] = [];
   novoCliente: Cliente = new Cliente();
-  form!: FormGroup;
-  private navigationSubscription!: Subscription;
-  editMode: boolean = false;
-  clienteSelecionado: any = null;
+  clienteSelecionado: Cliente | null = null;
 
+  editMode: boolean = false;
+
+  formCreate!: FormGroup;
+  formEdit!: FormGroup;
   index!: number;
+
+  private navigationSubscription!: Subscription;
   private modalService = inject(NgbModal);
 
   constructor(
@@ -54,49 +57,86 @@ export class ClientEditComponent implements OnInit {
     });
 
     // VALIDAÇÃO DOS CAMPOS
-    this.initForm();
+    this.initFormCreate();
+    this.initFormEdit();
   }
 
-  initForm() {
-    this.form = this.fb.group({
+  initFormCreate() {
+    this.formCreate = this.fb.group({
       nomeCompleto: ['', Validators.required],
-      cpf: ['', [Validators.required]],
+      cpf: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required]
     });
   }
 
-  // Atualizando o onSubmit para mapear os dados corretamente
-  onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+  initFormEdit() {
+    this.formEdit = this.fb.group({
+      nomeCompleto: ['', Validators.required],
+      cpf: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required]
+    });
+  }
+
+  onSubmitCreate() {
+    if (this.formCreate.invalid) {
+      this.formCreate.markAllAsTouched();
       return;
     }
 
-    const clienteData = this.form.value;
-
-    // Mapeando os dados do formulário para o model Cliente
-    const novoCliente = new Cliente(
-      clienteData.nomeCompleto,  // Mapear nomeCompleto do formulário para nome do model
+    const clienteData = this.formCreate.value;
+    this.salvarCliente(new Cliente(
+      clienteData.nomeCompleto,
       clienteData.cpf,
       clienteData.email,
       clienteData.telefone,
-      []  // guias_saidas pode ser deixado vazio por padrão
-    );
+      []
+    ));
+  }
 
-    if (this.editMode) {
-      this.updateCliente(novoCliente);
-    } else {
-      this.salvarCliente(novoCliente);
+  onSubmitEdit() {
+    if (this.formEdit.invalid) {
+      this.formEdit.markAllAsTouched();
+      return;
     }
 
-    
+    const clienteData = this.formEdit.value;
+
+    if (this.clienteSelecionado && this.clienteSelecionado.id) {
+      const clienteAtualizado: Cliente = {
+        id: this.clienteSelecionado.id,
+        nome: clienteData.nomeCompleto,
+        cpf: this.formatarCPF(clienteData.cpf),
+        email: clienteData.email,
+        telefone: this.formatarTelefone(clienteData.telefone),
+        guias_saidas: this.clienteSelecionado.guias_saidas // Inclua qualquer outro campo necessário
+      };
+
+      this.clienteService.AtualizarClienteReq(clienteAtualizado).subscribe(
+        (data) => {
+          console.log("Cliente atualizado com sucesso:", data);
+          this.carregarClientes(); // Recarrega a lista de clientes após a atualização
+        },
+        (error) => {
+          console.error("Erro ao atualizar cliente:", error);
+        }
+      );
+    }
   }
 
-  updateCliente(cliente: any) {
-
-    console.log("Cliente atualizado:", cliente);
+  // Função para garantir que o CPF esteja formatado corretamente
+  formatarCPF(cpf: string): string {
+    // Garante que o CPF esteja no formato 000.000.000-00
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   }
+
+  // Função para garantir que o telefone esteja formatado corretamente
+  formatarTelefone(telefone: string): string {
+    // Garante que o telefone esteja no formato (00)00000-0000
+    return telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+  }
+
 
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
@@ -104,20 +144,19 @@ export class ClientEditComponent implements OnInit {
     }
   }
 
-  abrirModal(content: any, index: number, action: string) {
-    this.index = index;
-
+  abrirModal(content: any, action: string, index?: number) {
     if (action === 'create') {
       this.editMode = false;
-      this.form.reset();
-    } else if (action === 'edit') {
+      this.formCreate.reset(); // Reseta o formulário de criação
+    } else if (action === 'edit' && index !== undefined) {
       this.editMode = true;
-      this.setClienteData(index);
+      this.clienteSelecionado = this.Clientes[index]; // Define o cliente a ser editado
+      this.setClienteData(); // Preenche o formulário de edição com os dados do cliente selecionado
     }
 
-    // Abre o modal com o conteúdo passado e tamanho 'lg'
     this.modalService.open(content, { size: 'lg' });
   }
+
 
 
   navegarEntrePaginas(rota: string) {
@@ -126,13 +165,13 @@ export class ClientEditComponent implements OnInit {
     });
   }
 
-  setClienteData(index: number) {
-    if (this.Clientes[index]) {
-      this.form.patchValue({
-        nomeCompleto: this.Clientes[index].nome,
-        cpf: this.Clientes[index].cpf,
-        email: this.Clientes[index].email,
-        telefone: this.Clientes[index].telefone
+  setClienteData() {
+    if (this.clienteSelecionado) {
+      this.formEdit.patchValue({
+        nomeCompleto: this.clienteSelecionado.nome,
+        cpf: this.clienteSelecionado.cpf,
+        email: this.clienteSelecionado.email,
+        telefone: this.clienteSelecionado.telefone
       });
     }
   }
@@ -150,6 +189,19 @@ export class ClientEditComponent implements OnInit {
     );
   }
 
+  atualizarCliente(id: number, cliente: Cliente) {
+    this.clienteService.AtualizarClienteReq({ ...cliente, id }).subscribe(
+      (data) => {
+        console.log("Cliente atualizado com sucesso:", data);
+        this.carregarClientes();
+        this.editMode = false;
+        this.clienteSelecionado = null;
+      },
+      (error) => {
+        console.error("Erro ao atualizar cliente:", error);
+      }
+    );
+  }
 
   carregarClientes(): void {
     this.clienteService.BuscaClienteReq().subscribe(
@@ -162,16 +214,33 @@ export class ClientEditComponent implements OnInit {
     );
   }
 
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.form.get(fieldName);
+  deletarCliente(id: number | undefined) {
+    if (id !== undefined) {
+      this.funcionarioService.DeletarClienteReq(id).subscribe(
+        (response) => {
+          console.log("Cliente deletado", response);
+          this.carregarClientes();
+        },
+        (error) => {
+          console.error("Erro ao deletar", error);
+        }
+      );
+    } else {
+      console.warn("ID de cliente inválido para exclusão");
+    }
+  }
+
+  isFieldInvalid(form: FormGroup, fieldName: string): boolean {
+    const field = form.get(fieldName);
     return field ? field.invalid && field.touched : false;
   }
 
-  getErrorMessage(fieldName: string): string {
-    const field = this.form.get(fieldName);
+  getErrorMessage(form: FormGroup, fieldName: string): string {
+    const field = form.get(fieldName);
     if (field?.hasError('required')) {
       return 'Este campo é obrigatório.';
     }
     return '';
   }
 }
+

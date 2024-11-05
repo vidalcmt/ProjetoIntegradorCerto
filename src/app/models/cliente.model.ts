@@ -19,8 +19,4 @@ export class Cliente {
         this.telefone = telefone;
         this.guias_saidas = guias_saidas;
     }
-
-    getClienteInfo(): string {
-        return `${this.nome} - ${this.email}`;
-    }
 }

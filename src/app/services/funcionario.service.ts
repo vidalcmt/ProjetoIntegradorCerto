@@ -14,4 +14,8 @@ export class FuncionarioService {
     SalvarClienteReq(cliente: Cliente): Observable<Cliente> {
         return this.http.post<Cliente>(`${this.apiUrl}/saveCliente`, cliente, {responseType: 'json'});
     }
+
+    DeletarClienteReq(id: number): Observable<string> {
+       return this.http.delete<string>(`${this.apiUrl}/delete/${id}`, { responseType: 'json'});
+    }
 }
