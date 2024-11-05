@@ -69,7 +69,6 @@ export class LoginComponent {
         if (isAuthenticated) {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
           this.router.navigateByUrl(returnUrl);
-          this.onLoginSuccess();
         }
       },
       (error) => {

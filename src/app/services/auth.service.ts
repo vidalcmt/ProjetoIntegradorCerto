@@ -16,9 +16,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(nome: string, senha: string): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl, { nome, senha }).pipe(tap((isAuthenticated) => {
-      this.loggedIn.next(isAuthenticated);
-    })
+    let params = new HttpParams()
+      .set('nome', nome)
+      .set('senha', senha);
+
+    return this.http.post<boolean>(this.apiUrl, {}, { params }).pipe(
+      tap((isAuthenticated: boolean) => {
+        this.loggedIn.next(isAuthenticated);
+      })
     );
   }
 
