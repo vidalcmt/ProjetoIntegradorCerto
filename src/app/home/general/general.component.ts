@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared-imports';
+import { ChartModule } from 'primeng/chart';
+import { Chart } from 'chart.js/auto';
+
 
 @Component({
   selector: 'app-general',
   standalone: true,
   imports: [
     SHARED_IMPORTS,
+    ChartModule
   ],
   templateUrl: './general.component.html',
   styleUrl: './general.component.scss'
