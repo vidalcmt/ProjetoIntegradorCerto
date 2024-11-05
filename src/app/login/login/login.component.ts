@@ -42,6 +42,27 @@ export class LoginComponent {
 
   }
 
+  // onLogin() {
+  //   this.authService.login(this.nome, this.senha).subscribe(
+  //     (isAuthenticated) => {
+  //       if (isAuthenticated) {
+  //         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+  //         this.router.navigateByUrl(returnUrl);
+  //         this.onLoginSuccess();
+  //       } else {
+  //         this.showErrorToast = true;
+  //         this.errorMessage = 'Usuário ou senha incorretos.';
+  //         this.escondeMensagemToast();
+  //       }
+  //     },
+  //     (error) => {
+  //       this.showErrorToast = true;
+  //       this.errorMessage = 'Erro de conexão com o servidor. Tente novamente mais tarde.';
+  //       this.escondeMensagemToast();
+  //     }
+  //   );
+  // }
+
   onLogin() {
     this.authService.login(this.nome, this.senha).subscribe(
       (isAuthenticated) => {
@@ -49,14 +70,26 @@ export class LoginComponent {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
           this.router.navigateByUrl(returnUrl);
           this.onLoginSuccess();
-        } else {
-          console.error("Usuário ou senha incorretos");
         }
       },
       (error) => {
-        console.error("Erro ao fazer login", error);
+        this.showErrorToast = true;
+        if (error.status === 400) {
+          this.errorMessage = 'Usuário ou senha incorretos.';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Erro de servidor. Tente novamente mais tarde.';
+        } else {
+          this.errorMessage = 'Ocorreu um erro inesperado. Tente novamente.';
+        }
+
+        this.hideToastAfterDelay();
       }
-    )
+    );
+  }
+
+
+  escondeMensagemToast() {
+
   }
 
   onLoginSuccess() {
@@ -67,5 +100,11 @@ export class LoginComponent {
     this.router.navigate([`/${rota}`]).then(() => {
       this.viewportScroller.scrollToPosition([0, 0]);
     });
+  }
+
+  hideToastAfterDelay() {
+    setTimeout(() => {
+      this.showErrorToast = false;
+    }, 5000);
   }
 }

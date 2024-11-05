@@ -1,32 +1,39 @@
-<div class="custom-gradient col-12 d-flex justify-content-center align-items-center h-100">
-    <div class="custom-background-login col-3 d-flex flex-column align-items-center" style="height: 380px;">
-        <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-5">
-            <h3 class="text-redhat fw-semibold fs-4 text-white m-0">Bem-vindo</h3>
-            <p class="text-poppins text-primary m-0">Faça login para continuar</p>
-        </div>
-        <div class="col-12 d-flex flex-column justify-content-center align-items-center my-4">
-            <ngb-toast *ngIf="showErrorToast" class="bg-danger text-white" header="Erro de Autenticação" [autohide]="false">
+<div class="custom-gradient container-fluid h-100 m-0 p-0">
+    <div class="col-md-12 d-flex justify-content-center" style="height: 250px;">
+        <div class="mt-4">
+            <ngb-toast *ngIf="showErrorToast" class="bg-danger text-white" header="Erro de Autenticação"
+                [autohide]="false">
                 {{ errorMessage }}
             </ngb-toast>
-            <div class="col-10 d-flex flex-column align-items-center">
-                <div class="col-8 d-flex flex-column">
-                    <label for="input-user" class="form-label">
-                        <p class="text-redhat text-white m-0">Usuário</p>
-                    </label>
-                    <input type="text" style="height: 30px; width: 215px;" pInputText [(ngModel)]="nome" />
-                </div>
+        </div>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center align-items-center my-auto flex-column">
+        <div class="custom-background-login col-3 d-flex flex-column align-items-center" style="height: 380px;">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-5">
+                <h3 class="text-redhat fw-semibold fs-4 text-white m-0">Bem-vindo</h3>
+                <p class="text-poppins text-primary m-0">Faça login para continuar</p>
+            </div>
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center my-4">
+                <div class="col-10 d-flex flex-column align-items-center">
+                    <div class="col-8 d-flex flex-column">
+                        <label for="input-user" class="form-label">
+                            <p class="text-redhat text-white m-0">Usuário</p>
+                        </label>
+                        <input type="text" style="height: 30px; width: 215px;" pInputText [(ngModel)]="nome" />
+                    </div>
 
-                <div class="col-8 d-flex flex-column mt-2">
-                    <label for="input-senha" class="form-label">
-                        <p class="text-redhat text-white m-0">Senha</p>
-                    </label>
-                    <p-password [(ngModel)]="senha" [inputStyle]="{ 'height': '30px', 'width': '215px'}" [toggleMask]="true" class="custom-password"
-                        [feedback]="false" />
+                    <div class="col-8 d-flex flex-column mt-2">
+                        <label for="input-senha" class="form-label">
+                            <p class="text-redhat text-white m-0">Senha</p>
+                        </label>
+                        <p-password [(ngModel)]="senha" [inputStyle]="{ 'height': '30px', 'width': '215px'}"
+                            [toggleMask]="true" class="custom-password" [feedback]="false" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-3">
-            <button class="btn btn-outline-primary btn-sm w-50" (click)="onLogin()">Login</button>
+            <div class="col-12 d-flex justify-content-center mt-3">
+                <button class="btn btn-outline-primary btn-sm w-50" (click)="onLogin()">Login</button>
+            </div>
         </div>
     </div>
 </div>
