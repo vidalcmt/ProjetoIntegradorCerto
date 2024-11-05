@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared/shared-imports';
 import { ViewportScroller } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
@@ -36,7 +36,8 @@ export class LoginComponent {
     (
       private router: Router,
       private viewportScroller: ViewportScroller,
-      private authService: AuthService
+      private authService: AuthService,
+      private route: ActivatedRoute
     ) {
 
   }
@@ -45,7 +46,8 @@ export class LoginComponent {
     this.authService.login(this.nome, this.senha).subscribe(
       (isAuthenticated) => {
         if (isAuthenticated) {
-          console.log("Login bem-sucedido");
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+          this.router.navigateByUrl(returnUrl);
           this.onLoginSuccess();
         } else {
           console.error("Usuário ou senha incorretos");
