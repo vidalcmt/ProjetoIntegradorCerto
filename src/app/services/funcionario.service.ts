@@ -12,6 +12,6 @@ export class FuncionarioService {
     constructor(private http: HttpClient) { }
 
     SalvarClienteReq(cliente: Cliente): Observable<Cliente> {
-        return this.http.post<Cliente>(`${this.apiUrl}/saveCliente`, cliente);
+        return this.http.post<Cliente>(`${this.apiUrl}/saveCliente`, cliente, {responseType: 'json'});
     }
 }

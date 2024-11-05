@@ -5,6 +5,8 @@ import { ViewportScroller } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from '../../services/auth.service';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ import { InputTextModule } from 'primeng/inputtext';
     SHARED_IMPORTS,
     PasswordModule,
     FloatLabelModule,
-    InputTextModule
+    InputTextModule,
+    NgbToastModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -24,13 +27,38 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class LoginComponent {
   value: string = '';
+  nome: string = '';
+  senha: string = '';
+  showErrorToast: boolean = false;
+  errorMessage: string = '';
 
   constructor
     (
       private router: Router,
-      private viewportScroller: ViewportScroller
+      private viewportScroller: ViewportScroller,
+      private authService: AuthService
     ) {
 
+  }
+
+  onLogin() {
+    this.authService.login(this.nome, this.senha).subscribe(
+      (isAuthenticated) => {
+        if (isAuthenticated) {
+          console.log("Login bem-sucedido");
+          this.onLoginSuccess();
+        } else {
+          console.error("Usuário ou senha incorretos");
+        }
+      },
+      (error) => {
+        console.error("Erro ao fazer login", error);
+      }
+    )
+  }
+
+  onLoginSuccess() {
+    this.navegarEntrePaginas('home');
   }
 
   navegarEntrePaginas(rota: string) {

@@ -66,6 +66,7 @@ export class ClientEditComponent implements OnInit {
     });
   }
 
+  // Atualizando o onSubmit para mapear os dados corretamente
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -74,11 +75,22 @@ export class ClientEditComponent implements OnInit {
 
     const clienteData = this.form.value;
 
+    // Mapeando os dados do formulário para o model Cliente
+    const novoCliente = new Cliente(
+      clienteData.nomeCompleto,  // Mapear nomeCompleto do formulário para nome do model
+      clienteData.cpf,
+      clienteData.email,
+      clienteData.telefone,
+      []  // guias_saidas pode ser deixado vazio por padrão
+    );
+
     if (this.editMode) {
-      this.updateCliente(clienteData);
+      this.updateCliente(novoCliente);
     } else {
-      this.salvarCliente(clienteData);
+      this.salvarCliente(novoCliente);
     }
+
+    
   }
 
   updateCliente(cliente: any) {

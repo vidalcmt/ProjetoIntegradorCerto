@@ -5,25 +5,28 @@
             <p class="text-poppins text-primary m-0">Faça login para continuar</p>
         </div>
         <div class="col-12 d-flex flex-column justify-content-center align-items-center my-4">
+            <ngb-toast *ngIf="showErrorToast" class="bg-danger text-white" header="Erro de Autenticação" [autohide]="false">
+                {{ errorMessage }}
+            </ngb-toast>
             <div class="col-10 d-flex flex-column align-items-center">
                 <div class="col-8 d-flex flex-column">
                     <label for="input-user" class="form-label">
                         <p class="text-redhat text-white m-0">Usuário</p>
                     </label>
-                    <input type="text" style="height: 30px; width: 215px;" pInputText [(ngModel)]="value" />
+                    <input type="text" style="height: 30px; width: 215px;" pInputText [(ngModel)]="nome" />
                 </div>
 
                 <div class="col-8 d-flex flex-column mt-2">
                     <label for="input-senha" class="form-label">
                         <p class="text-redhat text-white m-0">Senha</p>
                     </label>
-                    <p-password [inputStyle]="{ 'height': '30px', 'width': '215px'}" [toggleMask]="true" class="custom-password"
+                    <p-password [(ngModel)]="senha" [inputStyle]="{ 'height': '30px', 'width': '215px'}" [toggleMask]="true" class="custom-password"
                         [feedback]="false" />
                 </div>
             </div>
         </div>
         <div class="col-12 d-flex justify-content-center mt-3">
-            <button class="btn btn-outline-primary btn-sm w-50" (click)="navegarEntrePaginas('home')">Login</button>
+            <button class="btn btn-outline-primary btn-sm w-50" (click)="onLogin()">Login</button>
         </div>
     </div>
 </div>

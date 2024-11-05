@@ -26,7 +26,7 @@
                 </thead>
                 <tbody class="table-group-divider">
                     <tr *ngFor="let cliente of Clientes, let i = index">
-                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.nome }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.nome}}</th>
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.cpf }}</th>
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.email }}</th>
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.telefone }}</th>
@@ -115,8 +115,8 @@
 
                 <div class="col-md-4">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" formControlName="cpf" class="form-control"  mask="000.000.000-00"
-                        [ngClass]="{ 'is-invalid': isFieldInvalid('cpf') }" />
+                    <input type="text" formControlName="cpf" class="form-control" mask="000.000.000-00"
+                        [dropSpecialCharacters]="false" [ngClass]="{ 'is-invalid': isFieldInvalid('cpf') }" />
                     <div *ngIf="isFieldInvalid('cpf')" class="invalid-feedback">
                         {{ getErrorMessage('cpf') }}
                     </div>
@@ -148,7 +148,7 @@
     <div class="modal-footer">
         <div class="col-md-12 d-flex justify-content-end">
             <button type="submit" (click)="modal.dismiss()" class="btn btn-danger">Cancelar</button>
-            <button type="submit" (click)="onSubmit()" class="btn btn-success ms-4">Criar cliente</button>
+            <button type="submit" (click)="onSubmit(); modal.dismiss()" class="btn btn-success ms-4">Criar cliente</button>
         </div>
     </div>
 </ng-template>
