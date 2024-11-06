@@ -29,7 +29,4 @@ export class Produto {
         this.guias_saidas = guias_saidas;
     }
 
-    getProdutoInfo(): string {
-        return `${this.nome} - ${this.marca} - ${this.modelo}`;
-    }
 }

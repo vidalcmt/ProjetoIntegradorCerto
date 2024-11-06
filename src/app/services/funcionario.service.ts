@@ -41,8 +41,8 @@ export class FuncionarioService {
 //     return this.http.post<Fornecedor>(`${this.apiUrl}/saveFornecedor`, fornecedor, { responseType: 'json' });
 //   }
 
-  saveProduto(produto: Produto, id: number): Observable<Produto> {
-    return this.http.post<Produto>(`${this.apiUrl}/saveProduto/${id}`, produto, { responseType: 'json' });
+  saveProduto(produto: Produto, fornecedorId: number): Observable<Produto> {
+    return this.http.post<Produto>(`${this.apiUrl}/saveProduto/${fornecedorId}`, produto, { responseType: 'json' });
   }
 
 //   saveGuiaEntrada(guiaEntrada: GuiaEntrada, produto_id: number, fornecedor_id: number, funcionario_id: number): Observable<GuiaEntrada> {

@@ -19,7 +19,7 @@ export class ClienteService {
         return this.http.post<Cliente>(`${this.apiUrl}/save`, cliente);
     }
 
-    AtualizarClienteReq(cliente: Cliente): Observable<Cliente> {
+    AtualizarClienteReq(cliente: Partial<Cliente>): Observable<Cliente> {
         return this.http.put<Cliente>(`${this.apiUrl}/update`, cliente);
     }
 }

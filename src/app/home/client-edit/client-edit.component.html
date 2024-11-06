@@ -63,7 +63,8 @@
 
                 <div class="col-md-4">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" maxlength="11" formControlName="cpf" class="form-control"
+                    <input type="text"  formControlName="cpf" class="form-control"
+                    
                         [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'cpf') }" />
                     <div *ngIf="isFieldInvalid(formEdit, 'cpf')" class="invalid-feedback">
                         {{ getErrorMessage(formEdit ,'cpf') }}
