@@ -1,1 +1,182 @@
-<p>fornecedores works!</p>
+<div class="container-fluid m-0 p-0">
+    <div class="col-md-12 d-flex justify-content-center my-4">
+        <div class="col-md-11">
+            <div class="col-md-12 d-flex justify-content-between">
+                <p class="text-poppins fs-3 text-white fw-semibold ms-1 mb-0g">Gerenciar Fornecedores</p>
+                <button class="btn btn-success h-50" (click)="abrirModal(createFornecedor, 'create')">
+                    <i class="fa-solid fa-plus me-2" style="color: #ffffff;"></i>Novo Fornecedor
+                </button>
+            </div>
+
+            <hr style="color: white;">
+        </div>
+    </div>
+
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-md-11">
+            <table class="table table-dark table-hover">
+                <thead class="text-altivo fs-6">
+                    <tr>
+                        <th scope="col">Nome Social</th>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let fornecedor of Fornecedores; let i = index">
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;">{{ fornecedor.nome_social }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;">{{ fornecedor.cnpj }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;">{{ fornecedor.email }}</th>
+                        <th class="text-verdana fw-lighter" style="font-size: 14px;">{{ fornecedor.telefone }}</th>
+                        <th>
+                            <button class="btn btn-primary btn-sm text-poppins w-50 me-4"
+                                (click)="abrirModal(editFornecedor, 'edit', i)">Editar</button>
+                            <!-- <button class="btn btn-danger btn-sm w-25 text-poppins"
+                            (click)="abrirModal(deleteFornecedor, 'delete')">Excluir</button> -->
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #editFornecedor let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar Fornecedor</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formEdit" novalidate>
+            <div class="col-md-12 d-flex">
+                <div class="col-md-4 me-4">
+                    <label for="nome_social" class="form-label">Nome Social</label>
+                    <input type="text" formControlName="nome_social" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'nome_social') }" />
+                    <div *ngIf="isFieldInvalid(formEdit, 'nome_social')" class="invalid-feedback">
+                        {{ getErrorMessage(formEdit, 'nome_social') }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="cnpj" class="form-label">CNPJ</label>
+                    <input type="text" maxlength="14" formControlName="cnpj" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'cnpj') }" />
+                    <div *ngIf="isFieldInvalid(formEdit, 'cnpj')" class="invalid-feedback">
+                        {{ getErrorMessage(formEdit, 'cnpj') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 d-flex mt-2">
+                <div class="col-md-4 me-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'email') }" />
+                    <div *ngIf="isFieldInvalid(formEdit, 'email')" class="invalid-feedback">
+                        {{ getErrorMessage(formEdit, 'email') }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="text" maxlength="11" formControlName="telefone" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'telefone') }" />
+                    <div *ngIf="isFieldInvalid(formEdit, 'telefone')" class="invalid-feedback">
+                        {{ getErrorMessage(formEdit, 'telefone') }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" (click)="modal.dismiss()" class="btn btn-danger">Cancelar</button>
+            <button type="button" (click)="onSubmitEdit(); modal.dismiss()" class="btn btn-success ms-4">Salvar
+                Alterações</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #createFornecedor let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Criar Novo Fornecedor</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formCreate" novalidate>
+            <div class="col-md-11 d-flex">
+                <div class="col-md-6 me-4">
+                    <label for="nome_social" class="form-label">Nome Social</label>
+                    <input type="text" formControlName="nome_social" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formCreate, 'nome_social') }" />
+                    <div *ngIf="isFieldInvalid(formCreate, 'nome_social')" class="invalid-feedback">
+                        {{ getErrorMessage(formCreate, 'nome_social') }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="cnpj" class="form-label">CNPJ</label>
+                    <input type="text" formControlName="cnpj" class="form-control" mask="00.000.000/0000-00"
+                        [dropSpecialCharacters]="false"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formCreate, 'cnpj') }" />
+                    <div *ngIf="isFieldInvalid(formCreate, 'cnpj')" class="invalid-feedback">
+                        {{ getErrorMessage(formCreate, 'cnpj') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 d-flex mt-2">
+                <div class="col-md-4 me-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formCreate, 'email') }" />
+                    <div *ngIf="isFieldInvalid(formCreate, 'email')" class="invalid-feedback">
+                        {{ getErrorMessage(formCreate, 'email') }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="text" formControlName="telefone" class="form-control" mask="(00)00000-0000"
+                        [dropSpecialCharacters]="false"
+                        [ngClass]="{ 'is-invalid': isFieldInvalid(formCreate, 'telefone') }" />
+                    <div *ngIf="isFieldInvalid(formCreate, 'telefone')" class="invalid-feedback">
+                        {{ getErrorMessage(formCreate, 'telefone') }}
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" (click)="modal.dismiss()" class="btn btn-danger">Cancelar</button>
+            <button type="button" (click)="onSubmitCreate(); modal.dismiss()" class="btn btn-success ms-4">Criar
+                fornecedor</button>
+        </div>
+    </div>
+</ng-template>
+
+<!-- <ng-template #deleteClient let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Deletar cliente</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p class="text-poppins m-0 mb-1 fs-5">Você tem certeza que deseja deletar este usuário?</p>
+        <p class="text-altivo fw-lighter text-danger">Esta ação será irreversível</p>
+
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="submit" (click)="modal.dismiss()" class="btn btn-primary">Cancelar</button>
+            <button type="submit" (click)="deletarCliente(clienteSelecionado?.id); modal.dismiss()"
+                class="btn btn-danger ms-4">Deletar</button>
+        </div>
+    </div>
+</ng-template> -->

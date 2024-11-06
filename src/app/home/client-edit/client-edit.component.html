@@ -31,10 +31,10 @@
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.email }}</th>
                         <th class="text-verdana fw-lighter" style="font-size: 14px;"> {{ cliente.telefone }}</th>
                         <th>
-                            <button class="btn btn-primary btn-sm text-poppins w-25 me-4"
+                            <button class="btn btn-primary btn-sm text-poppins w-50 me-4"
                                 (click)="abrirModal(editClient, 'edit', i)">Editar</button>
-                            <button class="btn btn-danger btn-sm w-25 text-poppins"
-                                (click)="abrirModal(deleteClient, 'delete')">Excluir</button>
+                            <!-- <button class="btn btn-danger btn-sm w-25 text-poppins"
+                                (click)="abrirModal(deleteClient, 'delete')">Excluir</button> -->
                         </th>
                     </tr>
                 </tbody>

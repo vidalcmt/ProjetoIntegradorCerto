@@ -29,6 +29,12 @@ export class ScrollbarComponent implements OnInit {
 
   }
 
+  sairSistema(rota: string) {
+    this.router.navigate([`/${rota}`]).then(() => {
+      this.viewportScroller.scrollToPosition([0, 0]);
+    });
+  }
+  
   navegarEntrePaginas(rota: string) {
     this.router.navigate([`/home/${rota}`]).then(() => {
       this.viewportScroller.scrollToPosition([0, 0]);
