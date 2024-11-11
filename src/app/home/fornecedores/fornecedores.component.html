@@ -63,7 +63,7 @@
 
                 <div class="col-md-4">
                     <label for="cnpj" class="form-label">CNPJ</label>
-                    <input type="text" maxlength="14" formControlName="cnpj" class="form-control"
+                    <input type="text" formControlName="cnpj" class="form-control"
                         [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'cnpj') }" />
                     <div *ngIf="isFieldInvalid(formEdit, 'cnpj')" class="invalid-feedback">
                         {{ getErrorMessage(formEdit, 'cnpj') }}
@@ -83,7 +83,7 @@
 
                 <div class="col-md-4">
                     <label for="telefone" class="form-label">Telefone</label>
-                    <input type="text" maxlength="11" formControlName="telefone" class="form-control"
+                    <input type="text" formControlName="telefone" class="form-control"
                         [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit, 'telefone') }" />
                     <div *ngIf="isFieldInvalid(formEdit, 'telefone')" class="invalid-feedback">
                         {{ getErrorMessage(formEdit, 'telefone') }}

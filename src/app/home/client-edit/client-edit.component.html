@@ -84,7 +84,7 @@
 
                 <div class="col-md-4">
                     <label for="telefone" class="form-label">Telefone</label>
-                    <input type="text" maxlength="11" formControlName="telefone" class="form-control"
+                    <input type="text" formControlName="telefone" class="form-control"
                         [ngClass]="{ 'is-invalid': isFieldInvalid(formEdit ,'telefone') }" />
                     <div *ngIf="isFieldInvalid(formEdit ,'telefone')" class="invalid-feedback">
                         {{ getErrorMessage(formEdit ,'telefone') }}

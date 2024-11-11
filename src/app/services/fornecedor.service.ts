@@ -19,7 +19,7 @@ export class FornecedorService {
   }
 
   AtualizarFornecedorReq(fornecedor: Fornecedor): Observable<Fornecedor> {
-    return this.http.put<Fornecedor>(`${this.apiUrl}/update/${fornecedor.id}`, fornecedor);
+    return this.http.put<Fornecedor>(`${this.apiUrl}/update`, fornecedor);
   }
 
   BuscaFornecedorReq(): Observable<Fornecedor[]> {
