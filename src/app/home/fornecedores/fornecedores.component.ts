@@ -16,7 +16,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
   imports: [SHARED_IMPORTS,
     ReactiveFormsModule,
     NgxMaskDirective,
-    NgxMaskPipe,
   ],
   templateUrl: './fornecedores.component.html',
   styleUrl: './fornecedores.component.scss',
