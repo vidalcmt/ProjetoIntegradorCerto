@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PrimeNGConfig } from 'primeng/api';
-import { Aura } from 'primeng/themes/aura';
+import { PrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +11,16 @@ import { Aura } from 'primeng/themes/aura';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(private config: PrimeNGConfig) {
+
+  constructor(private config: PrimeNG) {
+
     this.config.theme.set({
       preset: Aura,
+      options: {
+        prefix: 'p',
+        darkModeSelector: 'system',
+        cssLayer: false
+      }
     });
   }
 
