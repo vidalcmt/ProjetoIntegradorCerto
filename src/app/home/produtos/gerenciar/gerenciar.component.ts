@@ -4,6 +4,7 @@ import { ProdutoService } from '../../../services/produto.service';
 import { Produto } from '../../../models/produto.model';
 import { GuiaEntradaService } from '../../../services/guia-entrada.service';
 import { Guia_Entrada } from '../../../models/guia_entrada.model';
+import { Chart } from 'chart.js';
 
 
 @Component({
@@ -22,7 +23,24 @@ export class GerenciarComponent implements OnInit {
     private guiaEntradaService: GuiaEntradaService
   ) { }
 
-  ngOnInit(): void { }
+  produtos = [
+    { nome: 'Produto A', quantidade: 10, preco: 100.00 },
+    { nome: 'Produto B', quantidade: 20, preco: 200.00 },
+    { nome: 'Produto C', quantidade: 30, preco: 300.00 }
+  ];
+  ngOnInit(): void {
+    new Chart('myChart', {
+      type: 'bar',
+      data: {
+        labels: ['Produto A', 'Produto B', 'Produto C'],
+        datasets: [{
+          label: 'Quantidade em Estoque',
+          data: [10, 20, 30],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        }]
+      }
+    });
+  }
 
   lancarGuiaEntrada(produtoId: number, fornecedorId: number) {
     const guiaEntrada = new Guia_Entrada();
