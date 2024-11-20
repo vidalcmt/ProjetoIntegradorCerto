@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared-imports';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
@@ -12,6 +12,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Toast } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -23,11 +24,13 @@ import { ButtonModule } from 'primeng/button';
     ReactiveFormsModule,
     NgxMaskDirective,
     ButtonModule,
-    Toast
+    Toast,
+    TableModule
   ],
   templateUrl: './client-edit.component.html',
   styleUrl: './client-edit.component.scss',
-  providers: [provideNgxMask()]
+  providers: [provideNgxMask()],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClientEditComponent implements OnInit {
   Clientes: Cliente[] = [];
