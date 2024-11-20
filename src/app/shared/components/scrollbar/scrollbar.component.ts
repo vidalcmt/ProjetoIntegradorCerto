@@ -4,13 +4,19 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { Router } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { ViewportScroller } from '@angular/common';
+import { Avatar } from 'primeng/avatar';
+import { AvatarGroup } from 'primeng/avatargroup';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-scrollbar',
   standalone: true,
   imports: [
     SHARED_IMPORTS,
-    PanelMenuModule
+    PanelMenuModule,
+    Avatar,
+    AvatarGroup,
+    ButtonModule
   ],
   templateUrl: './scrollbar.component.html',
   styleUrl: './scrollbar.component.scss',

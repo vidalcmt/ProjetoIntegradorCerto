@@ -1,22 +1,21 @@
-<div class="container-fluid m-0 p-0 text-white custom-scrollbar" style="height: 100vh;">
-    <div class="col-md-12 py-4">
-        <div class="col-md-12 d-flex justify-content-center align-items-center">
-            <img src="assets/images/user.png" class="h-25 w-25" alt="teste">
+<div class="container-fluid m-0 p-0 text-white custom-scrollbar h-100">
+    <div class="col-md-12">
+        <div class="col-md-12 d-flex align-items-center justify-content-center py-3">
+            <p-button severity="contrast" label="Menu" icon="pi pi-home" (click)="navegarEntrePaginas('')" aria-label="Save" />
         </div>
-        <div class="col-md-12 d-flex justify-content-md-evenly mt-3">
-            <div class="col-md-4 d-md-flex justify-content-md-center">
-                <button class="bg-transparent border-0 text-white" (click)="sairSistema('login')">Sair</button>
-            </div>
 
-            <div class="col-md-4 d-md-flex justify-content-md-center">
-                <button class="bg-transparent border-0 text-white">Settings</button>
-            </div>
+        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center pb-3">
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" size="xlarge"
+                shape="circle" />
+            <span class="font-bold mt-2">
+                Admin
+            </span>
         </div>
     </div>
 
     <hr class="m-0">
 
-    <div class="col-md-12 d-flex justify-content-center">
+    <div class="col-md-12 d-flex flex-column justify-content-center">
         <div class="col-md-12">
             <div class="accordion" id="menuAccordion">
                 <!-- Estoque -->
@@ -94,6 +93,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 d-flex justify-content-md-evenly mt-5">
+        <div class="col-md-4 d-md-flex justify-content-md-center rounded-pill">
+            <button class="bg-transparent border-0 text-white" (click)="sairSistema('login')">Sair</button>
+        </div>
+
+        <div class="col-md-4 d-md-flex justify-content-md-center rounded-pill">
+            <button class="bg-transparent border-0 text-white">Settings</button>
         </div>
     </div>
 </div>

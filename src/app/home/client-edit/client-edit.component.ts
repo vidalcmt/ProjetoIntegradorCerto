@@ -10,6 +10,9 @@ import { Subscription } from 'rxjs';
 import { subscribe } from 'diagnostics_channel';
 import { FuncionarioService } from '../../services/funcionario.service';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { Toast } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+
 
 
 @Component({
@@ -18,7 +21,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   imports: [
     SHARED_IMPORTS,
     ReactiveFormsModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    ButtonModule,
+    Toast
   ],
   templateUrl: './client-edit.component.html',
   styleUrl: './client-edit.component.scss',
