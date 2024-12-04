@@ -24,15 +24,15 @@ export class GerenciarComponent implements OnInit {
   ) { }
 
   produtos = [
-    { nome: 'Produto A', quantidade: 10, preco: 100.00 },
-    { nome: 'Produto B', quantidade: 20, preco: 200.00 },
-    { nome: 'Produto C', quantidade: 30, preco: 300.00 }
+    { nome: 'Maquina Agrícola', quantidade: 10, dataSaida: '28/12/2024' , preco: 100.00 },
+    { nome: 'Trator', quantidade: 20, dataSaida: '22/12/2024' ,preco: 200.00 },
+    { nome: 'Motor Lamborghini', quantidade: 30, dataSaida: '30/12/2024' , preco: 300.00 }
   ];
   ngOnInit(): void {
     new Chart('myChart', {
       type: 'bar',
       data: {
-        labels: ['Produto A', 'Produto B', 'Produto C'],
+        labels: ['Maquina Agrícola', 'Trator', 'Motor Lamboghini'],
         datasets: [{
           label: 'Quantidade em Estoque',
           data: [10, 20, 30],

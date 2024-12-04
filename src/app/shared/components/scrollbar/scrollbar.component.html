@@ -1,7 +1,8 @@
 <div class="container-fluid m-0 p-0 text-white custom-scrollbar h-100">
     <div class="col-md-12">
         <div class="col-md-12 d-flex align-items-center justify-content-center py-3">
-            <p-button severity="contrast" label="Menu" icon="pi pi-home" (click)="navegarEntrePaginas('')" aria-label="Save" />
+            <p-button severity="contrast" label="Menu" icon="pi pi-home" (click)="navegarEntrePaginas('')"
+                aria-label="Save" />
         </div>
 
         <div class="col-md-12 d-flex flex-column justify-content-center align-items-center pb-3">
@@ -32,13 +33,8 @@
                             <button (click)="navegarEntrePaginas('produtos')"
                                 class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
                                 style="color: white;">
-                                <i class="pi pi-user-edit me-2"></i> Gerenciar Estoque
+                                Gerenciar Estoque
                             </button>
-                            <!-- <button (click)="navegarEntrePaginas('cliente-editar')"
-                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
-                                style="color: white;">
-                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
-                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -57,7 +53,27 @@
                             <button (click)="navegarEntrePaginas('cliente-editar')"
                                 class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
                                 style="color: white;">
-                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
+                                Gerenciar Clientes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fornecedores -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSupplier">
+                        <button class="accordion-button collapsed w-100" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSupplier" aria-expanded="false" aria-controls="collapseSupplier">
+                            <i class="fa-solid fa-truck me-2"></i> Fornecedores
+                        </button>
+                    </h2>
+                    <div id="collapseSupplier" class="accordion-collapse collapse w-100"
+                        aria-labelledby="headingClientes" data-bs-parent="#menuAccordion">
+                        <div class="accordion-body p-0">
+                            <button (click)="navegarEntrePaginas('fornecedores')"
+                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
+                                style="color: white;">
+                                Gerenciar Fornecedores
                             </button>
                             <!-- <button (click)="navegarEntrePaginas('cliente-editar')"
                                 class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
@@ -68,27 +84,22 @@
                     </div>
                 </div>
 
-                <!-- Fornecedores -->
+                <!-- Financeiro -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingSupplier">
                         <button class="accordion-button collapsed w-100" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseSupplier" aria-expanded="false" aria-controls="collapseSupplier">
-                            <i class="pi pi-users me-2"></i> Fornecedores
+                            data-bs-target="#collapseFinancial" aria-expanded="false" aria-controls="collapseFinancial">
+                            <i class="fa-solid fa-money-bill me-2"></i> Financeiro
                         </button>
                     </h2>
-                    <div id="collapseSupplier" class="accordion-collapse collapse w-100"
+                    <div id="collapseFinancial" class="accordion-collapse collapse w-100"
                         aria-labelledby="headingClientes" data-bs-parent="#menuAccordion">
                         <div class="accordion-body p-0">
-                            <button (click)="navegarEntrePaginas('fornecedores')"
+                            <button (click)="navegarEntrePaginas('financeiro')"
                                 class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
                                 style="color: white;">
-                                <i class="fa-solid fa-truck-field me-2"></i> Gerenciar Fornecedores
+                                Gerenciar Resultados
                             </button>
-                            <!-- <button (click)="navegarEntrePaginas('cliente-editar')"
-                                class="btn bg-transparent d-flex align-items-center py-3 px-4 w-100 border-0"
-                                style="color: white;">
-                                <i class="pi pi-user-edit me-2"></i> Gerenciar Clientes
-                            </button> -->
                         </div>
                     </div>
                 </div>

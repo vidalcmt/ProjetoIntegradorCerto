@@ -6,6 +6,7 @@ import { ClientEditComponent } from './home/client-edit/client-edit.component';
 import { AuthGuard } from './auth/auth.guard';
 import { GerenciarComponent } from './home/produtos/gerenciar/gerenciar.component';
 import { FornecedoresComponent } from './home/fornecedores/fornecedores.component';
+import { FinanceiroComponent } from './home/financeiro/financeiro.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
             { path: 'cliente-editar', component: ClientEditComponent, runGuardsAndResolvers: 'always' },
             { path: 'produtos', component: GerenciarComponent, runGuardsAndResolvers: 'always' },
             { path: 'fornecedores', component: FornecedoresComponent, runGuardsAndResolvers: 'always' },
+            { path: 'financeiro', component: FinanceiroComponent, runGuardsAndResolvers: 'always' },
         ]
     },
     { path: '**', redirectTo: 'login' },

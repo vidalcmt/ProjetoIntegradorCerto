@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="col-md-12 d-flex flex-column align-items-center my-4">
         <div class="col-md-11">
-            <p class="text-poppins fs-3 text-white fw-semibold ms-1">Estoque de protudos</p>
+            <p class="text-poppins fs-3 text-white fw-semibold ms-1">Estoque de produtos</p>
             <hr style="color: white;">
         </div>
 
@@ -22,6 +22,7 @@
                             <tr>
                                 <th>Nome do Produto</th>
                                 <th>Quantidade</th>
+                                <th>Data de Saída</th>
                                 <th>Preço</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                             <tr *ngFor="let produto of produtos">
                                 <td>{{ produto.nome }}</td>
                                 <td>{{ produto.quantidade }}</td>
+                                <td>{{ produto.dataSaida }}</td>
                                 <td>{{ produto.preco | currency:'BRL' }}</td>
                             </tr>
                         </tbody>
